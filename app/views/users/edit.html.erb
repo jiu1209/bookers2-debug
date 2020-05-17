@@ -1,0 +1,28 @@
+<h2>User info</h2>
+
+<%= form_for(@user, url: user_path) do |f| %>
+<%= render 'layouts/usererror_messages', model: f.object %>
+
+<div class="field">
+	<%= f.label :name %>
+	<%= f.text_field :name, class: "name" %>
+</div>
+
+<div class="field">
+	<%= f.label :image %>
+	<%= f.attachment_field :profile_image, class: "user_image" %>
+</div>
+
+<div class="field">
+	<%= f.label :introduction %>
+	<%= f.text_area :introduction, class: "introduction" %>
+</div>
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+
+<% end %>
+<div class="top">
+<br><P>CopyRight Infratop.inc</P></br>
+</div>
