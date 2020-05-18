@@ -15,6 +15,7 @@
  */
 @import "bootstrap-sprockets";  /*ここを追加*/
 @import "bootstrap";            /*ここを追加*/
+@import "font-awesome";
 
 header {
 	color:white;
@@ -35,4 +36,7 @@ body {
 .top{
 	margin-left: 700px;
 
+}
+ul {
+	list-style: none;
 }

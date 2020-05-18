@@ -5,6 +5,7 @@ before_action :login_check, only: [:edit]
   	@book = Book.find(params[:id])
     @users = User.all
     @user = @book.user
+    @book_comment = BookComment.new
   end
 
   def index
@@ -53,7 +54,7 @@ end
   private
 
   def book_params
-  	params.require(:book).permit(:title, :body )
+  	params.require(:book).permit(:title, :body)
   end
 
   def login_check

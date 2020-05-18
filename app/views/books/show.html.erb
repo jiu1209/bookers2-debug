@@ -16,22 +16,54 @@
 		<table class="table">
 				<tr>
 					<tbody>
-					<td>
-						<%= link_to (@user) do %>
-						<%= attachment_image_tag @user, :profile_image,  fallback: "no_image.jpg", size: "40x40" %><br>
-						<%= @user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @book.title %></td>
-					<td><%= @book.body %></td>
+				       <td>
+						 <%= link_to (@user) do %>
+						 <%= attachment_image_tag @user, :profile_image,  fallback: "no_image.jpg", size: "40x40" %><br>
+						 <%= @user.name %>
+						 <% end %>
+				   	   </td>
+					   <td><%= link_to @book.title %></td>
+					   <td><%= @book.body %></td>
+					   <td>
+					     <ul>
+					       <% if @book.favorited_by?(current_user) %>
+                           <li>
+                             <%= link_to  book_favorites_path(@book), method: :delete do %>
+                             <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                             <%= @book.favorites.count %>
+                            <% end %>
+                            </li>
+                            <% else %>
+                            <li>
+                              <%= link_to  book_favorites_path(@book), method: :post do %>
+                              <i class="fa fa-heart" aria-hidden="true"></i>
+                              <%= @book.favorites.count %> 
+                            </li>
+                         </ul>
+                        </td>
+                      <% end %>
+                    <% end %> 
+                    <td>
+                      <ul>
+                        <li>
+                            <%= link_to "コメント数 : #{@book.book_comments.count}", book_path(@book.id) %>
+                        </li>
+                      </ul>
+                    </td>
 					 <% if user_signed_in? && current_user.id == @book.user_id %>
-					<td><%= link_to "Edit",edit_book_path(@book.id), class: "btn-sm btn-success" %></td>
-					<td><%= link_to "Destroy",book_path(@book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book" %>
-					<% end %>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+					   <td><%= link_to "Edit",edit_book_path(@book.id), class: "btn-sm btn-success" %></td>
+					   <td><%= link_to "Destroy",book_path(@book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book" %></td>
+                     <% end %>
+		      	  </tbody>
+		       </tr>
+		      </table>
+		       <%= form_for [@book,@book_comment] do |f| %>
+                 <div class="col-sm-12">
+                   <%= f.text_area :comment, rows:'5', class: "form-control"%>
+                 </div>
+                 <%=  f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+                <% end %>
+
 		<div class="top">
           <br><P>CopyRight Infratop.inc</P></br>
         </div>
