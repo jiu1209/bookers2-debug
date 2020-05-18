@@ -15,6 +15,7 @@ before_action :login_check, only: [:edit]
   end
 
   def create
+      @book_comment = BookComment.new
   	  @book = Book.new(book_params) #Bookモデルのテーブルを使用しているのでbookコントローラで保存する。
       @book.user_id = current_user.id
 

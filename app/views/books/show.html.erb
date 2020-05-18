@@ -57,6 +57,12 @@
 		      	  </tbody>
 		       </tr>
 		      </table>
+		      <% @book.book_comments.each do |book| %>
+		         <div class="tot">
+                 <span><%= book.comment %>
+                 <%= link_to "Destroy", book_book_comment_path(book_id: @book.id, book_comment_id: book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_comment" %></span></div>
+                <% end %>
+
 		       <%= form_for [@book,@book_comment] do |f| %>
                  <div class="col-sm-12">
                    <%= f.text_area :comment, rows:'5', class: "form-control"%>
