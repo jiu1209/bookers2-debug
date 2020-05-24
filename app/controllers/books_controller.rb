@@ -38,7 +38,7 @@ end
 
 
   def update
-  	@book = Book.find(params[:id])
+  	   @book = Book.find(params[:id])
   	if @book.update(book_params)
   		redirect_to @book, notice: "successfully updated book!"
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
